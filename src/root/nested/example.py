@@ -4,53 +4,60 @@ Created on 22 feb. 2017
 @author: Per Eriksson
 '''
 
+### IMPORTS ###
 import csv
-import plotly as py
-import plotly.graph_objs as go
+import matplotlib.pyplot as plt
 from datetime import datetime
 
-with open('050608-170217.csv',  'r') as f:
+### FUNCTIONS ##############################
+def unpack_CSV(csv_list):
+    dates = []
+    high = []
+    low = []
+    close = []
+    
+    for line in my_list[1:]:
+        row = line[0].split(";")
+        rowDate = row[0].split('-')
+        dates.append(datetime(year=int(rowDate[0]), month=int(rowDate[1]), day=int(rowDate[2])))
+        high.append(row[1])
+        low.append(row[2])
+        close.append(row[3])
+        
+    return dates,high,low,close
+
+def calc_SMA(data, time):
+    if time<0 or len(data)==0: 
+        return -1
+    
+    sma=[]
+    for index in enumerate(data):
+        if index < time:
+            sma.append(0)
+        else:
+            sma.append(sum(data[index-time:index])/time)
+    
+    return sma
+
+### END FUNCTION BLOCK ######################
+
+
+with open('050608-170217.csv', 'r') as f:
     reader = csv.reader(f)
     my_list = list(reader)
     
-print(len(my_list))
-print(my_list[1])
+#print(len(my_list))
+#print(my_list[1])
 
-dates = []
-high = []
-low = []
-close = []
+dates,high,low,close = unpack_CSV(my_list)
 
-for line in my_list[1:]:
-    row = line[0].split(";")
-    rowDate = row[0].split('-')
-    dates.append(datetime(year=int(rowDate[0]), month=int(rowDate[1]), day=int(rowDate[2])))
-    high.append(row[1])
-    low.append(row[2])
-    close.append(row[3])
+#print(len(dates))
+#print(dates[2])
+#plt.plot(dates,close)
+#plt.show()
 
-print(len(dates))
-print(dates[2])
+plt.plot(dates,close)
+plt.show()
 
-# Create traces
-trace0 = go.Scatter(
-    x = dates,
-    y = high,
-    mode = 'lines',
-    name = 'lines'
-)
-trace1 = go.Scatter(
-    x = dates,
-    y = low,
-    mode = 'lines+markers',
-    name = 'lines+markers'
-)
-trace2 = go.Scatter(
-    x = dates,
-    y = close,
-    mode = 'markers',
-    name = 'markers'
-)
-data = [trace0, trace1, trace2]
 
-py.offline.iplot(data, filename='line-mode')
+    
