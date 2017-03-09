@@ -1,0 +1,6 @@
+matplotlib
+pycrypto
+httplib2
+
+# How to install pycrypto:
+# http://stackoverflow.com/questions/41843266/microsoft-windows-python-3-6-pycrypto-installation-error

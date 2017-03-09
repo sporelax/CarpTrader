@@ -9,6 +9,7 @@ import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
 from math import floor
+import nordnet
 transactionCostMult = 0.998
 
 ### FUNCTIONS ##############################
@@ -61,8 +62,9 @@ def doSell(capital,price,noStocks):
     return retSum,number
 
 def daterange(start_date,end_date):
-    for n in range(int ((end_date - start_date).days)):
-        yield start_date + timedelta(n)
+    #for n in range(int ((end_date - start_date).days)):
+        #yield start_date + timedelta(n)
+    return -1
     
 ### END FUNCTION BLOCK ######################
 
