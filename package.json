@@ -1,0 +1,18 @@
+{
+  "name": "CarpTrader",
+  "author": "Per Eriksson",
+  "version": "0.1.0",
+  "main": "build/main.js",
+  "scripts": {
+    "build": "gulp",
+    "run": "electron dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sporelax/CarpTrader.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.1.2"
+  }
+}
